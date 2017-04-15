@@ -1,7 +1,7 @@
 var mysql = require('mysql');
 var md5 = require('md5');
 var utils = {};
-utils.connection = mysql.createConnection({
+utils.connection = mysql.createPool({
   host     : 'us-cdbr-iron-east-03.cleardb.net',
   user     : 'b26fbc6986aebc',
   password : '20eff454',

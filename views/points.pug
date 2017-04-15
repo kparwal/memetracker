@@ -1,0 +1,12 @@
+extends layout
+
+block content
+  h1= title
+  div: form(method='post', class='form-vertical')
+    fieldset
+        select(name='recv')
+            - repeation = point_list
+            each item in repeation
+                option #{item.username}
+        input.form-control(name='value', autofocus)
+        input.btn.btn-primary(type='submit', value='Submit')

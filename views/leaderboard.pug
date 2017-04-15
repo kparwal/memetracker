@@ -1,0 +1,31 @@
+extends layout
+
+block content
+  h1= title
+  div
+  table
+    thead
+      tr: th Points
+    tbody
+      tr
+        td.
+          <b> Username|</b>
+        td.
+          <b> Monthly Points|</b>
+        td.
+          <b> Total Points</b>
+      each row in point_list
+        tr
+          td. 
+            #{row.username}
+          td.
+            #{row.monthly_points}
+          td.
+            #{row.total_points}
+  br
+  br
+  a(href='/points') Add Points
+  br
+  br
+  br
+  a(href='/logout') Logout

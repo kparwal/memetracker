@@ -2,7 +2,7 @@ var mysql = require('mysql');
 var md5 = require('md5');
 var utils = {};
 utils.connection = mysql.createConnection({
-  host     : 'us-cdbr-iron-east-03.cleardb.net/heroku_4dd48e9e5b85ccb?reconnect=true',
+  host     : 'us-cdbr-iron-east-03.cleardb.net',
   user     : 'b26fbc6986aebc',
   password : '20eff454',
   database : 'heroku_2d7fc86d75f050c'

@@ -20,7 +20,9 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     if (req.session.username) {
         if (is_number(req.body.value)) {
-            utils.update_points(req.body.recv, parseInt(req.body.value));
+        	if (parseInt(req.body.value) <= 10 &&  parseInt(req.body.value) >= -10){
+            	utils.update_points(req.body.recv, parseInt(req.body.value));
+        	}
         }
     }
     res.redirect('../');

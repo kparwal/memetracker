@@ -10,6 +10,7 @@ router.get('/', function(req, res, next) {
         utils.connection.getConnection(function(err, conn) {
             conn.query('SELECT username, monthly_points, total_points FROM users', function(error, results, fields) {
                 console.dir(results);
+                conn.release();
                 res.render('leaderboard', { title: 'Leaderboard', point_list: results });
             });
         });
@@ -24,6 +25,7 @@ router.post('/', function(req, res, next) {
         if (valid) {
             utils.connection.getConnection(function(err, conn) {
                 conn.query('SELECT username, monthly_points, total_points FROM users', function(error, results, fields) {
+                		conn.release();
                     // console.dir(results);
                     req.session.username = req.body.username;
                     res.render('leaderboard', { title: 'Leaderboard', point_list: results });

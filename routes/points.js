@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
         utils.connection.getConnection(function(err, conn) {
             utils.connection.query('SELECT username, monthly_points, total_points FROM users WHERE username != \"' + (req.body.username || req.session.username) + '\"', function(error, results, fields) {
                 // console.dir(results);
+                conn.release();
                 res.render('points', { title: 'Give Points', point_list: results });
             });
         });

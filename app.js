@@ -7,8 +7,7 @@ var bodyParser = require('body-parser');
 var dbutils = require('./db-utils.js');
 var session = require('cookie-session');
 
-dbutils.connection.connect();
-console.log("db connection active");
+
 
 var index = require('./routes/index');
 var users = require('./routes/users');

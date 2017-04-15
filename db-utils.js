@@ -2,10 +2,10 @@ var mysql = require('mysql');
 var md5 = require('md5');
 var utils = {};
 utils.connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'root',
-  database : 'points-app'
+  host     : 'us-cdbr-iron-east-03.cleardb.net/heroku_4dd48e9e5b85ccb?reconnect=true',
+  user     : 'b26fbc6986aebc',
+  password : '20eff454',
+  database : 'heroku_2d7fc86d75f050c'
 });
 
 utils.verify_user = function(username, password, cb) {

@@ -30,8 +30,8 @@ utils.verify_user = function(username, password, cb) {
 
 utils.update_points = function(username, val, cb) {
 	utils.connection.getConnection(function(err,conn){
-    	conn.query('UPDATE users SET monthly_points = monthly_points + ' + val + ' WHERE username = \"' + username + '\";', function(){
-    		conn.query('UPDATE users SET total_points = total_points + ' + val + ' WHERE username = \"' + username + '\";', function(){
+    	conn.query('UPDATE users SET monthly_points = monthly_points + ' + utils.connection.escape(val) + ' WHERE username = \"' + utils.connection.escape(username) + '\";', function(){
+    		conn.query('UPDATE users SET total_points = total_points + ' + utils.connection.escape(val) + ' WHERE username = \"' + utils.connection.escape(username) + '\";', function(){
     			conn.release();
     		});
     	});

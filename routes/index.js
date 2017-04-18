@@ -5,8 +5,8 @@ var utils = require('../db-utils.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("SESSION OBJECT");
-    console.dir(req.session);
-    if (req.session && req.session.username) {
+    // console.dir(req.session);
+    if (req) {
         utils.connection.getConnection(function(err, conn) {
             conn.query('SELECT username, monthly_points, total_points FROM users', function(error, results, fields) {
                 console.dir(results);
@@ -14,7 +14,6 @@ router.get('/', function(req, res, next) {
                 res.render('leaderboard', { title: 'Leaderboard', point_list: results });
             });
         });
-
     } else {
         res.render('index', { title: 'Meme Tracker', message: "", user: "" });
     }
@@ -25,9 +24,9 @@ router.post('/', function(req, res, next) {
         if (valid) {
             utils.connection.getConnection(function(err, conn) {
                 conn.query('SELECT username, monthly_points, total_points FROM users', function(error, results, fields) {
-                		conn.release();
+                	conn.release();
                     // console.dir(results);
-                    req.session.username = req.body.username;
+                    // req.session.username = req.body.username;
                     res.render('leaderboard', { title: 'Leaderboard', point_list: results });
                 });
             });

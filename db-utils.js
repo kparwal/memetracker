@@ -10,7 +10,7 @@ utils.connection = mysql.createPool({
 
 utils.verify_user = function(username, password, cb) {
     utils.connection.getConnection(function(err, conn) {
-        conn.query('SELECT * FROM users WHERE username=\"' + username + '\"', function(error, results, fields) {
+        conn.query('SELECT * FROM users WHERE username=\"' + utils.connection.escape(username) + '\"', function(error, results, fields) {
         	conn.release();
             // console.dir(results);
             if (results.length > 0) {

@@ -24,8 +24,16 @@ block content
             #{row.total_points}
   br
   br
-  a(href='/points') Add Points
+  div: form(method='post', class='form-vertical')
+    fieldset
+        select(name='recv')
+            - repeation = point_list
+            each item in repeation
+                option #{item.username}
+        input.form-control(name='value', autofocus)
+        input.btn.btn-primary(type='submit', value='Submit')
   br
   br
   br
   a(href='/logout') Logout
+  

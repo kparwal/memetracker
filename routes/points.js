@@ -4,7 +4,7 @@ var utils = require('../db-utils.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-    if (req.session.username) {
+    if (req) {
         utils.connection.getConnection(function(err, conn) {
             utils.connection.query('SELECT username, monthly_points, total_points FROM users WHERE username != \"' + utils.connection.escape((req.body.username || req.session.username)) + '\"', function(error, results, fields) {
                 // console.dir(results);
@@ -18,7 +18,8 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/', function(req, res, next) {
-    if (req.session.username) {
+    console.dir(req.body);
+    if (req) {
         if (is_number(req.body.value)) {
         	if (parseInt(req.body.value) <= 10 &&  parseInt(req.body.value) >= -10){
             	utils.update_points(req.body.recv, parseInt(req.body.value));

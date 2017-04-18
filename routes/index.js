@@ -5,8 +5,8 @@ var utils = require('../db-utils.js');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     console.log("SESSION OBJECT");
-    // console.dir(req.session);
-    if (req) {
+    console.dir(req.session);
+    if (req.session && req.session.username) {
         utils.connection.getConnection(function(err, conn) {
             conn.query('SELECT username, monthly_points, total_points FROM users', function(error, results, fields) {
                 console.dir(results);
@@ -26,7 +26,7 @@ router.post('/', function(req, res, next) {
                 conn.query('SELECT username, monthly_points, total_points FROM users', function(error, results, fields) {
                 	conn.release();
                     // console.dir(results);
-                    // req.session.username = req.body.username;
+                    req.session.username = req.body.username;
                     res.render('leaderboard', { title: 'Leaderboard', point_list: results });
                 });
             });

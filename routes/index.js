@@ -22,9 +22,10 @@ router.get('/', function(req, res, next) {
 router.post('/', function(req, res, next) {
     utils.verify_user(req.body.username, req.body.password, function(valid) {
         if (valid) {
+            console.dir(req.body);
             utils.connection.getConnection(function(err, conn) {
                 conn.query('SELECT username, monthly_points, total_points FROM users', function(error, results, fields) {
-                	conn.release();
+                    conn.release();
                     // console.dir(results);
                     req.session.username = req.body.username;
                     res.render('leaderboard', { title: 'Leaderboard', point_list: results });

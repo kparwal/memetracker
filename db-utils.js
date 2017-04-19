@@ -10,7 +10,9 @@ utils.connection = mysql.createPool({
 
 utils.verify_user = function(username, password, cb) {
     utils.connection.getConnection(function(err, conn) {
-        conn.query('SELECT * FROM users WHERE username=\"' + username + '\"', function(error, results, fields) {
+        // console.log('escaped');
+        // console.log(mysql.escape(username));
+        conn.query('SELECT * FROM users WHERE username=' + mysql.escape(username) + '', function(error, results, fields) {
         	conn.release();
             // console.dir(results);
             if (results.length > 0) {
@@ -30,8 +32,8 @@ utils.verify_user = function(username, password, cb) {
 
 utils.update_points = function(username, val, cb) {
 	utils.connection.getConnection(function(err,conn){
-    	conn.query('UPDATE users SET monthly_points = monthly_points + ' + val + ' WHERE username = \"' + username + '\";', function(){
-    		conn.query('UPDATE users SET total_points = total_points + ' + val + ' WHERE username = \"' + username + '\";', function(){
+    	conn.query('UPDATE users SET monthly_points = monthly_points + ' + mysql.escape(val) + ' WHERE username = ' + mysql.escape(username) + ';', function(){
+    		conn.query('UPDATE users SET total_points = total_points + ' + mysql.escape(val) + ' WHERE username = ' + mysql.escape(username) + ';', function(){
     			conn.release();
     		});
     	});
